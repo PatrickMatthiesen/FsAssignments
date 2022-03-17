@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="Assignment 1\Program.fsx" />
+		<None Include="Assignment 1\Exercises.fsx" />
+		<None Include="Assignment 2\Complex.fsx" />
+		<None Include="Assignment 2\Script1.fsx" />
+		<None Include="Assignment 3\Script1.fsx" />
+		<Compile Include="Assignment 4\Dictionary.fsi" />
+		<Compile Include="Assignment 4\Dictionary.fs" />
+		<Compile Include="Assignment 4\MultiSet.fsi" />
+		<Compile Include="Assignment 4\MultiSet.fs" />
+		<None Include="Assignment 4\Script1.fsx" />
+		<None Include="Assignment 5\Script1.fsx" />
+		<Compile Include="Assignment 6\StateMonad.fsi" />
+		<Compile Include="Assignment 6\StateMonad.fs" />
+		<Compile Include="Assignment 6\Eval.fs" />
+		<Compile Include="Assignment 6\Program.fsx" />
+		<Compile Include="Assignment 7\Eval.fs" />
+		<Compile Include="Assignment 7\StateMonad.fs" />
+		<Compile Include="Assignment 7\StateMonad.fsi" />
+		<Compile Include="Assignment 7\FParsecLight.fsi" />
+		<Compile Include="Assignment 7\JParsec.fsi" />
+		<Compile Include="Assignment 7\FParsecLight.fs" />
+		<Compile Include="Assignment 7\JParsec.fs" />
+		<Compile Include="Assignment 7\Parser.fs" />
+		<Compile Include="Assignment 7\Program.fsx" />
+		<Compile Include="Program.fs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="FParsec" Version="1.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="FSharp.Core" Version="6.0.3" />
+	</ItemGroup>
+
+
+
+</Project>
