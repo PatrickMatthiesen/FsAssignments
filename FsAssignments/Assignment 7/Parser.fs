@@ -2,6 +2,7 @@
 
     open Eval
     open System
+    open StateMonad
 
     (*
 
@@ -152,16 +153,29 @@
     type word   = (char * int) list
     type square = Map<int, squareFun>
 
-    let parseSquareProg (sqp: squareProg): square = sqp |> Map.map (fun k v -> run stmntParse v |> getSuccess |> stmntToSquareFun)
+    let parseSquareProg sqp : square = 
+        sqp |> Map.map (fun _ v -> run stmntParse v |> getSuccess |> stmntToSquareFun)
 
-    let parseBoardProg (bp: boardProg): board = 
-
-    type boardFun2 = coord -> StateMonad.Result<square option, StateMonad.Error>
+    type boardFun2 = coord -> Result<square option, Error>
     type board = {
         center        : coord
         defaultSquare : square
         squares       : boardFun2
     }
 
-    let mkBoard (bp : boardProg) = failwith "not implemented"
+
+    let parseBoardProg = 
+        run stmntParse >> getSuccess >> stmntToBoardFun
+
+    let mkBoard (bp : boardProg) = 
+        let x = bp.usedSquare
+        {
+            center = bp.center;
+            defaultSquare = Map.find bp.usedSquare bp.squares |> parseSquareProg
+            squares = 
+                let m' = Map.map (fun _ m -> parseSquareProg m) bp.squares
+                parseBoardProg bp.prog m'
+        }
+
+        //'Result<square option,StateMonad.Error>' does not match the type 'StateMonad.Result<'a option,StateMonad.Error>'
 

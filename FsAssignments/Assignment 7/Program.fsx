@@ -215,3 +215,17 @@ for y in -10..10 do
 
 
 0 // return an integer exit code
+
+
+let id x =
+    let foo = printfn "A"; x //evaluates to: first execute print and then set the value of foo to x
+    let bar = fun () ->
+        printfn "B"
+        foo
+    let foobar () =
+        let r = bar () //print b and then set the value of r to foo
+        printfn "C"
+        r
+    foobar ()
+
+id 5

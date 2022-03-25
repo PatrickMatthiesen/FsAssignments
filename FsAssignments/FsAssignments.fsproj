@@ -17,19 +17,19 @@
 		<Compile Include="Assignment 4\MultiSet.fs" />
 		<None Include="Assignment 4\Script1.fsx" />
 		<None Include="Assignment 5\Script1.fsx" />
-		<Compile Include="Assignment 6\StateMonad.fsi" />
-		<Compile Include="Assignment 6\StateMonad.fs" />
-		<Compile Include="Assignment 6\Eval.fs" />
-		<Compile Include="Assignment 6\Program.fsx" />
-		<Compile Include="Assignment 7\Eval.fs" />
 		<Compile Include="Assignment 7\StateMonad.fs" />
 		<Compile Include="Assignment 7\StateMonad.fsi" />
+		<Compile Include="Assignment 7\Eval.fs" />
 		<Compile Include="Assignment 7\FParsecLight.fsi" />
 		<Compile Include="Assignment 7\JParsec.fsi" />
 		<Compile Include="Assignment 7\FParsecLight.fs" />
 		<Compile Include="Assignment 7\JParsec.fs" />
 		<Compile Include="Assignment 7\Parser.fs" />
 		<Compile Include="Assignment 7\Program.fsx" />
+		<None Include="Assignment 6\StateMonad.fsi" />
+		<None Include="Assignment 6\StateMonad.fs" />
+		<None Include="Assignment 6\Eval.fs" />
+		<None Include="Assignment 6\Program.fsx" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
 

@@ -241,13 +241,13 @@
 
     type boardFun = coord -> Result<squareFun option, Error> 
 
-    let stmntToBoardFun stm (m: Map<int, squareFun>) : boardFun = //failwith "Not implemented"
+    let stmntToBoardFun stm m = //failwith "Not implemented"
         fun (x,y) -> 
             stmntEval2 stm >>>= lookup "_result_" |> 
                     evalSM (
                         mkState [("_x_", x); ("_y_", y); ("_result_", 0)] [] ["_x_"; "_y_"; "_result_"] ) |>
                             function
-                            | Success int -> if m.ContainsKey int then Success (Some m.[int]) else Success None
+                            | Success int -> if Map.containsKey int m then Success (Some m.[int]) else Success None
                             | Failure err -> Failure err
 
     type board = {
