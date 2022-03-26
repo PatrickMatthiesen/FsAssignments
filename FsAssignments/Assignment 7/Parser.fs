@@ -14,6 +14,7 @@
     open JParsec.TextParser             // Example parser combinator library. Use for CodeJudge.
     // open FParsecLight.TextParser     // Industrial parser-combinator library. Use for Scrabble Project.
     
+    //7.1
     let pIntToChar  = pstring "intToChar"
     let pPointValue = pstring "pointValue"
 
@@ -35,6 +36,7 @@
     let pdo       = pstring "do"
     let pdeclare  = pstring "declare"
 
+    //7.2
     let whitespaceChar = satisfy Char.IsWhiteSpace <?> "whitespace"
     let pletter        = satisfy Char.IsLetter <?> "letter"
     let palphanumeric  = satisfy Char.IsLetterOrDigit <?> "alphanumeric"
@@ -42,20 +44,25 @@
     let spaces         = many (pchar ' ' <|> pchar '\n') <?> "spaces"
     let spaces1        = many1 (pchar ' ') <?> "space1"
 
+    //7.3
     let (.>*>.) p1 p2 = p1 .>> spaces .>>. p2
     let (.>*>) p1 p2  = p1 .>> spaces .>> p2 // tager og parser p1 og gemmer svaret, dernæst parserden spaces men smider resultatet ud, der efter tager den og parser p2 og smider det ud også
     let (>*>.) p1 p2  = p1 >>. spaces >>. p2
 
+    //7.4
     let parenthesise p = pchar '(' >*>. p .>*> pchar ')' // incorrect (not implemented)
     let braces p = pchar '{' >*>. p .>*> pchar '}'
 
+    //7.5
     let pid = 
         (pletter <|> pchar '_') .>>. many (palphanumeric <|> pchar '_') |>> (fun (x,y) -> (x::y) |> String.Concat)
 
-    
+    //7.6
     let unop op p1 = op >*>. p1
 
+    //7.7
     let binop op p1 p2 = p1 .>*> op .>*>. p2
+    
     
     let TermParse, tref = createParserForwardedToRef<aExp>()
     let ProdParse, pref = createParserForwardedToRef<aExp>()
@@ -67,7 +74,7 @@
     let StmParse, sref = createParserForwardedToRef<stm>()
     let SseqParse, seqref = createParserForwardedToRef<stm>()
 
-    //arith
+    //arith 7.8
     let AddParse = binop (pchar '+') ProdParse TermParse |>> Add <?> "Add"
     let SubParse = binop (pchar '-') ProdParse TermParse |>> Sub <?> "Sub"
     do tref.Value <- choice [AddParse; SubParse; ProdParse]
@@ -87,7 +94,7 @@
 
     let AexpParse = TermParse 
 
-    //char
+    //char 7..9
     let CParParse = parenthesise CtomParse
     let CParse = pchar ''' >>. anyChar .>> pchar ''' |>> C <?> "C"
     let CVParse = unop pCharValue AtomParse |>> CV <?> "CV"
@@ -98,7 +105,7 @@
 
     let CexpParse = CtomParse
 
-    //bool
+    //bool 7.10
     let BConj = binop (pstring "/\\") BequParse BconParse |>> Conj
     let BOr = binop (pstring "\\/") BequParse BconParse |>> (fun (x,y) -> x.||.y)
     do conref.Value <- choice [BConj; BOr; BequParse]
@@ -123,7 +130,7 @@
 
     let BexpParse = BconParse
 
-
+    //statement 7.11
     let Sseq = binop (pchar ';') StmParse SseqParse |>> Seq <?> "Seq"
     do seqref.Value <- choice [Sseq; StmParse]
 
@@ -153,6 +160,7 @@
     type word   = (char * int) list
     type square = Map<int, squareFun>
 
+    //7.12
     let parseSquareProg sqp : square = 
         sqp |> Map.map (fun _ v -> run stmntParse v |> getSuccess |> stmntToSquareFun)
 
@@ -163,10 +171,11 @@
         squares       : boardFun2
     }
 
-
+    //7.13
     let parseBoardProg = 
         run stmntParse >> getSuccess >> stmntToBoardFun
 
+    //7.14
     let mkBoard (bp : boardProg) = 
         let x = bp.usedSquare
         {
