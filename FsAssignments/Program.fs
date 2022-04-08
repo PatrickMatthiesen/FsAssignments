@@ -14,6 +14,8 @@ open Gaddag
 
 let emptyDict = empty ()
 
-lookup "H>ello" (insert "Hello" emptyDict) |> printfn "%A"
+insert "Hello" emptyDict |> printfn "%A"
+
+lookup "Hello" (insert "Hello" emptyDict) |> printfn "%A"
 
 0

@@ -39,14 +39,14 @@ module Gaddag
         List.fold (fun acc word -> _insert word acc) d words
 
     let rec lookup (s:string) =
-        let aux (s:string) = 
+        let rec aux (s:string) = 
             function
             | Leaf b when s.Length = 0 -> b
             | Leaf _ -> false
             | Node (b, _) when s.Length = 0 -> b
             | Node (_, dict) ->
                 match dict.TryGetValue s[0] with
-                | (true, d) -> lookup s[1..] d
+                | (true, d) -> aux s[1..] d
                 | (false, _) -> false 
         aux (s[0].ToString() + $"{ancor}{s[1..]}")
 
@@ -60,3 +60,7 @@ module Gaddag
                 | Node (b,_) -> Some (b,value)
             | (false, _) -> None
         | Leaf _ -> None
+    
+    let reverse =
+        step ancor.[0]
+        
