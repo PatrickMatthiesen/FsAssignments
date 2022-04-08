@@ -25,11 +25,13 @@
 		<Compile Include="Assignment 7\FParsecLight.fs" />
 		<Compile Include="Assignment 7\JParsec.fs" />
 		<Compile Include="Assignment 7\Parser.fs" />
-		<Compile Include="Assignment 7\Program.fsx" />
+		<None Include="Assignment 7\Program.fsx" />
 		<None Include="Assignment 6\StateMonad.fsi" />
 		<None Include="Assignment 6\StateMonad.fs" />
 		<None Include="Assignment 6\Eval.fs" />
 		<None Include="Assignment 6\Program.fsx" />
+		<Compile Include="Project\Gaddag.fs" />
+		<None Include="Project\tests.fsx" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
 
