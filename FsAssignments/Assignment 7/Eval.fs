@@ -151,39 +151,36 @@
                let! y = b
                return f x y }
 
-    let rec arithEval2 a = //arithEval a
-        match a with
-        | N n -> prog {return n}
-        | V x -> prog {return! lookup x}
-        | WL -> prog {return! wordLength}
-        | PV a1 -> prog {
-            let! a = arithEval a1 
-            return! pointValue a
-            }
-        | Add (a1, a2) -> binop2 ( + ) (arithEval a1) (arithEval a2)
-        | Sub (a1, a2) -> binop2 ( - ) (arithEval a1) (arithEval a2)
-        | Mul (a1, a2) -> binop2 ( * ) (arithEval a1) (arithEval a2)
-        | Div (a1, a2) -> prog {
-                let! a = arithEval a1
-                let! b = arithEval a2
-                if b <> 0 then
-                    return (a/b)
-                else
-                    return! fail DivisionByZero
-            }
-        | Mod (a1,a2) ->
-            prog {
-                let! a = arithEval a1
-                let! b = arithEval a2
-                if b <> 0 then
-                    return (a%b)
-                else
-                    return! fail DivisionByZero
-            }
-        | CharToInt c -> prog {
-                let! r = charEval c
-                return int r
-            }
+    let rec arithEval2 a =
+        prog {
+            match a with
+            | N n -> return n
+            | V x -> return! lookup x
+            | WL -> return! wordLength
+            | PV a1 -> 
+                let! a = arithEval a1 
+                return! pointValue a
+            | Add (a1, a2) -> return! binop2 ( + ) (arithEval a1) (arithEval a2)
+            | Sub (a1, a2) -> return! binop2 ( - ) (arithEval a1) (arithEval a2)
+            | Mul (a1, a2) -> return! binop2 ( * ) (arithEval a1) (arithEval a2)
+            | Div (a1, a2) -> 
+                    let! a = arithEval a1
+                    let! b = arithEval a2
+                    if b <> 0 then
+                        return (a/b)
+                    else
+                        return! fail DivisionByZero
+            | Mod (a1,a2) ->
+                    let! a = arithEval a1
+                    let! b = arithEval a2
+                    if b <> 0 then
+                        return (a%b)
+                    else
+                        return! fail DivisionByZero
+            | CharToInt c ->
+                    let! r = charEval c
+                    return int r
+        }
         
 
     let charEval2 c = charEval c
@@ -201,8 +198,7 @@
         | Seq (stm1,stm2) -> //stmntEval stm1 >>>= stmntEval stm2 >>= (fun r -> ret r)
             prog {
                 do! stmntEval stm1
-                let! a = stmntEval stm2
-                return a
+                return! stmntEval stm2
             }
         | ITE (b, stm1, stm2) -> //boolEval b >>= (fun bool -> if bool then stmntEval stm1 else stmntEval stm2 )
             prog {
@@ -227,7 +223,7 @@
 
 (* Part 4 (Optional) *) 
 
-    type word = (char * int) list
+    type word = (char * int) list //a list of letters and their point value
     type squareFun = word -> int -> int -> Result<int, Error>
 
     let stmntToSquareFun stm : squareFun = 

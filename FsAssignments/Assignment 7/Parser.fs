@@ -157,8 +157,8 @@
             ppSquare   : string // For pretty-printing purposes only
         }
 
-    type word   = (char * int) list
-    type square = Map<int, squareFun>
+    type word   = (char * int) list //a list of letters and their point value
+    type square = Map<int, squareFun> // an id to a 
 
     //7.12
     let parseSquareProg sqp : square = 
@@ -176,8 +176,7 @@
         run stmntParse >> getSuccess >> stmntToBoardFun
 
     //7.14
-    let mkBoard (bp : boardProg) = 
-        let x = bp.usedSquare
+    let mkBoard (bp : boardProg) =
         {
             center = bp.center;
             defaultSquare = Map.find bp.usedSquare bp.squares |> parseSquareProg
