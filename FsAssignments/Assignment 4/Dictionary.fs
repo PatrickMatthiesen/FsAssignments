@@ -1,4 +1,8 @@
-﻿
+﻿// This is my Trie implementation.
+// You can find the Gaddag implementation under 'Project/Gaddag.fs'
+// If you want to make and hand in the Gaddag implementation, 
+//  you might have to rename the file and or the module name.
+
 module Dictionary
     open System.Collections.Generic
     type Dict = 
