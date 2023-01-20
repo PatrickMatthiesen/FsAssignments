@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="ExamInteractive.fsx" />
+    <Compile Include="JParsec.fsi" />
+    <Compile Include="JParsec.fs" />
+    <Compile Include="Xam.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  <ItemGroup />
+</Project>

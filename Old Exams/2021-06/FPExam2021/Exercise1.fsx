@@ -216,7 +216,7 @@ let rec elSeq2 el : element seq =
 //"1" |> elFromString |> elSeq2 |> Seq.item 3
 
 //3.5
-#load "..\..\Assignment 7\JParsec.fs"
+#load "..\..\..\FsAssignments\Assignment 7\JParsec.fs"
 //#load "JParsec.fs"
 
 open JParsec.TextParser

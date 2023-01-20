@@ -32,8 +32,6 @@
 		<None Include="Assignment 6\Program.fsx" />
 		<Compile Include="Project\Gaddag.fs" />
 		<None Include="Project\tests.fsx" />
-		<Compile Include="Old Exams\2021-06\Xfile1.fs" />
-		<None Include="Old Exams\2021-06\Exercise1.fsx" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
 
